@@ -1,4 +1,4 @@
-import { showToast, ToastStyle } from "@raycast/api";
+import { Toast } from "@raycast/api";
 import { runAppleScript } from "run-applescript";
 
 export default async () => {
@@ -14,8 +14,8 @@ export default async () => {
 
   try {
     await runAppleScript(script);
-    await showToast(ToastStyle.Success, "Copied URL to clipboard");
+    await Toast.show(Toast.Style.Success, "Copied URL to clipboard");
   } catch (_) {
-    await showToast(ToastStyle.Failure, "Failed copying URL");
+    await Toast.show(Toast.Style.Failure, "Failed copying URL");
   }
 };

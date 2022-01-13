@@ -1,14 +1,4 @@
-import {
-  ActionPanel,
-  copyTextToClipboard,
-  Form,
-  Icon,
-  OpenInBrowserAction,
-  showToast,
-  SubmitFormAction,
-  Toast,
-  ToastStyle,
-} from "@raycast/api";
+import { ActionPanel, Clipboard, Form, Icon, Action, Toast } from "@raycast/api";
 import got from "got";
 
 export default function Command() {
@@ -17,7 +7,7 @@ export default function Command() {
       actions={
         <ActionPanel>
           <ShareSecretAction />
-          <OpenInBrowserAction url="https://share.doppler.com" />
+          <Action.OpenInBrowser url="https://share.doppler.com" />
         </ActionPanel>
       }
     >
@@ -48,11 +38,11 @@ export default function Command() {
 function ShareSecretAction() {
   async function handleSubmit(values: { secret: string; expireViews: number; expireDays: number }) {
     if (!values.secret) {
-      showToast(ToastStyle.Failure, "Secret is required");
+      Toast.show(Toast.Style.Failure, "Secret is required");
       return;
     }
 
-    const toast = new Toast({ style: ToastStyle.Animated, title: "Sharing secret" });
+    const toast = new Toast({ style: Toast.Style.Animated, title: "Sharing secret" });
     await toast.show();
 
     try {
@@ -61,17 +51,17 @@ function ShareSecretAction() {
         responseType: "json",
       });
 
-      await copyTextToClipboard((body as any).authenticated_url);
+      await Clipboard.copy((body as any).authenticated_url);
 
-      toast.style = ToastStyle.Success;
+      toast.style = Toast.Style.Success;
       toast.title = "Shared secret";
       toast.message = "Copied link to clipboard";
     } catch (error) {
-      toast.style = ToastStyle.Failure;
+      toast.style = Toast.Style.Failure;
       toast.title = "Failed sharing secret";
       toast.message = String(error);
     }
   }
 
-  return <SubmitFormAction icon={Icon.Upload} title="Share Secret" onSubmit={handleSubmit} />;
+  return <Action.SubmitForm icon={Icon.Upload} title="Share Secret" onSubmit={handleSubmit} />;
 }

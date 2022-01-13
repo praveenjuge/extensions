@@ -1,11 +1,11 @@
-import { ActionPanel, Detail, showHUD, showToast, Toast, ToastStyle } from "@raycast/api";
+import { ActionPanel, Detail, Toast } from "@raycast/api";
 import { setTimeout } from "timers/promises";
 
 const description = `
 # Notifications
 
 In Raycast, users perform actions to create or update content. It's best to confirm these actions
-with visual elements. For this, you can show toasts or HUDs. 
+with visual elements. For this, you can show toasts or HUDs.
 
 ## Toasts
 
@@ -14,7 +14,7 @@ them for confirming network requests, e.g. updating a Linear issue.
 
 ## HUDs
 
-HUDs are perfect to show when you confirm a small action. Showing a HUD closes the main window. 
+HUDs are perfect to show when you confirm a small action. Showing a HUD closes the main window.
 We use them when you copy something to the clipboard, e.g. in the Clipboard History.
 `;
 
@@ -25,20 +25,20 @@ export default function Command() {
       actions={
         <ActionPanel>
           <ActionPanel.Section>
-            <ActionPanel.Item
+            <Action
               title="Show Success Toast"
-              onAction={() => showToast(ToastStyle.Success, "Showed success toast")}
+              onAction={() => Toast.show(Toast.Style.Success, "Showed success toast")}
             />
-            <ActionPanel.Item
+            <Action
               title="Show Failure Toast with Message"
               onAction={() =>
-                showToast(ToastStyle.Failure, "Showed failure toast", "Message with additional information")
+                Toast.show(Toast.Style.Failure, "Showed failure toast", "Message with additional information")
               }
             />
             <AnimatedToast />
           </ActionPanel.Section>
           <ActionPanel.Section>
-            <ActionPanel.Item title="Show HUD" onAction={() => showHUD("Showed HUD")} />
+            <Action title="Show HUD" onAction={() => Toast.showHUD("Showed HUD")} />
           </ActionPanel.Section>
         </ActionPanel>
       }

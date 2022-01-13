@@ -9,8 +9,8 @@ export default function Command() {
       markdown={count.toString()}
       actions={
         <ActionPanel>
-          <ActionPanel.Item title="Increment Counter" onAction={() => setCount((c) => c + 1)} />
-          <ActionPanel.Item title="Decrement Counter" onAction={() => setCount((c) => c - 1)} />
+          <Action title="Increment Counter" onAction={() => setCount((c) => c + 1)} />
+          <Action title="Decrement Counter" onAction={() => setCount((c) => c - 1)} />
         </ActionPanel>
       }
     />

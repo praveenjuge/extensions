@@ -1,4 +1,4 @@
-import { ActionPanel, SubmitFormAction, Color, Form, Icon, showToast, ToastStyle } from "@raycast/api";
+import { ActionPanel, Action, Color, Form, Icon, Toast } from "@raycast/api";
 
 interface FormValues {
   textField: string;
@@ -12,14 +12,14 @@ interface FormValues {
 export default function Command() {
   function handleSubmit(values: FormValues) {
     console.log(values);
-    showToast(ToastStyle.Success, "Submitted form", "See logs for submitted values");
+    Toast.show(Toast.Style.Success, "Submitted form", "See logs for submitted values");
   }
 
   return (
     <Form
       actions={
         <ActionPanel>
-          <SubmitFormAction title="Submit" onSubmit={handleSubmit} />
+          <Action.SubmitForm title="Submit" onSubmit={handleSubmit} />
         </ActionPanel>
       }
     >

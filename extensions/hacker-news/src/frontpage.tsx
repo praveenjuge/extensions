@@ -1,4 +1,4 @@
-import { ActionPanel, CopyToClipboardAction, List, OpenInBrowserAction, showToast, ToastStyle } from "@raycast/api";
+import { ActionPanel, Action, List, Toast } from "@raycast/api";
 import { useEffect, useState } from "react";
 import Parser from "rss-parser";
 
@@ -26,7 +26,7 @@ export default function Command() {
   }, []);
 
   if (state.error) {
-    showToast(ToastStyle.Failure, "Failed loading stories", state.error.message);
+    Toast.show(Toast.Style.Failure, "Failed loading stories", state.error.message);
   }
 
   return (
@@ -58,12 +58,12 @@ function Actions(props: { item: Parser.Item }) {
   return (
     <ActionPanel title={props.item.title}>
       <ActionPanel.Section>
-        {props.item.link && <OpenInBrowserAction url={props.item.link} />}
-        {props.item.guid && <OpenInBrowserAction url={props.item.guid} title="Open Comments in Browser" />}
+        {props.item.link && <Action.OpenInBrowser url={props.item.link} />}
+        {props.item.guid && <Action.OpenInBrowser url={props.item.guid} title="Open Comments in Browser" />}
       </ActionPanel.Section>
       <ActionPanel.Section>
         {props.item.link && (
-          <CopyToClipboardAction
+          <Action.CopyToClipboard
             content={props.item.link}
             title="Copy Link"
             shortcut={{ modifiers: ["cmd"], key: "." }}

@@ -3,11 +3,7 @@
   "name": "mynaui-icons",
   "title": "MynaUI Icons",
   "description": "Search and Copy MynaUI Icons.",
-<<<<<<< HEAD
   "icon": "extension-icon.png",
-=======
-  "icon": "command-icon.png",
->>>>>>> contributions/merge-1728311547005583000
   "author": "praveenjuge",
   "categories": [
     "Design Tools",
